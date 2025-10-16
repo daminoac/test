@@ -20,7 +20,7 @@ jobs:
             ${{ runner.os }}-ayugram-desktop-
 
       - name: build
-        uses: 2m/arch-pkgbuild-builder@v1
+        uses: 2m/arch-pkgbuild-builder@v1.16
         with:
           target: 'pkgbuild'
           pkgname: 'ayugram-desktop'
@@ -50,7 +50,7 @@ jobs:
             ${{ runner.os }}-ayugram-desktop-git-
 
       - name: build
-        uses: 2m/arch-pkgbuild-builder@v1
+        uses: 2m/arch-pkgbuild-builder@v1.16
         with:
           target: 'pkgbuild'
           pkgname: 'ayugram-desktop-git'
