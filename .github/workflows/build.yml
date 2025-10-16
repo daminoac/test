@@ -1,0 +1,62 @@
+name: build
+on:
+  workflow_dispatch:
+jobs:
+  ayugram-desktop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache
+            td-*/build
+            build
+          key: ${{ runner.os }}-ayugram-desktop-${{ hashFiles('**/PKGBUILD', '**/*.patch') }}
+          restore-keys: |
+            ${{ runner.os }}-ayugram-desktop-
+
+      - name: build
+        uses: 2m/arch-pkgbuild-builder@v1
+        with:
+          target: 'pkgbuild'
+          pkgname: 'ayugram-desktop'
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: ./*/*.pkg.tar.zst
+          name: ayugram-desktop
+
+  ayugram-desktop-git:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache
+            build_tde2e
+            build
+            deps
+          key: ${{ runner.os }}-ayugram-desktop-git-${{ hashFiles('**/PKGBUILD', '**/*.patch') }}-${{ hashFiles('**/.gitmodules') }}
+          restore-keys: |
+            ${{ runner.os }}-ayugram-desktop-git-
+
+      - name: build
+        uses: 2m/arch-pkgbuild-builder@v1
+        with:
+          target: 'pkgbuild'
+          pkgname: 'ayugram-desktop-git'
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: ./*/*.pkg.tar.zst
+          name: ayugram-desktop-git
