@@ -53,7 +53,7 @@ jobs:
       - name: build
         uses: heyhusen/archlinux-package-action@v2.4.0
         with:
-          path: ayugram-desktop-git:
+          path: ayugram-desktop-git
           flags: '-s --noconfirm'
           aur: true
 
