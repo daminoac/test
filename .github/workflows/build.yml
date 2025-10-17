@@ -20,10 +20,11 @@ jobs:
             ${{ runner.os }}-ayugram-desktop-
 
       - name: build
-        uses: 2m/arch-pkgbuild-builder@v1.16
+        uses: heyhusen/archlinux-package-action@v2.4.0
         with:
-          target: 'pkgbuild'
-          pkgname: 'ayugram-desktop'
+          path: ayugram-desktop
+          flags: '-s --noconfirm'
+          aur: true
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.2
@@ -50,10 +51,11 @@ jobs:
             ${{ runner.os }}-ayugram-desktop-git-
 
       - name: build
-        uses: 2m/arch-pkgbuild-builder@v1.16
+        uses: heyhusen/archlinux-package-action@v2.4.0
         with:
-          target: 'pkgbuild'
-          pkgname: 'ayugram-desktop-git'
+          path: ayugram-desktop-git:
+          flags: '-s --noconfirm'
+          aur: true
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.2
