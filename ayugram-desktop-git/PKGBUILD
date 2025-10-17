@@ -133,8 +133,8 @@ build() {
   )
 
   cmake "${_cmake_tde2e[@]}"
-  cmake --build "build_tde2e" --parallel $(nproc) -j 8
-  DESTDIR="$srcdir/deps" cmake --install "build_tde2e" --parallel $(nproc) -j 8
+  cmake --build "build_tde2e" --parallel $(nproc) --verbose -j 8
+  DESTDIR="$srcdir/deps" cmake --install "build_tde2e" --parallel $(nproc) --verbose -j 8
 
   echo "Building ayugram..."
   local _cmake_options=(
@@ -153,7 +153,7 @@ build() {
   )
 
   cmake "${_cmake_options[@]}"
-  cmake --build build --parallel $(nproc) -j 8
+  cmake --build build --parallel $(nproc) --verbose -j 8
 }
 
 package() {
@@ -187,5 +187,5 @@ package() {
     )"
   fi
 
-  DESTDIR="$pkgdir" cmake --install build --parallel $(nproc) -j 8
+  DESTDIR="$pkgdir" cmake --install build --parallel $(nproc) --verbose -j 8
 }
