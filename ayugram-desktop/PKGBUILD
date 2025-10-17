@@ -219,6 +219,10 @@ prepare() {
     head -n 27 28d19a99.patch | patch -d "AyuGramDesktop-$pkgver" -p1
 }
 build() {
+    export CCACHE_DIR="${CCACHE_DIR:-$HOME/.cache/ccache}"
+    export CC="ccache gcc"
+    export CXX="ccache g++"
+    mkdir -p "$CCACHE_DIR"
     CXXFLAGS+=' -ffat-lto-objects'
     cmake -B td-$_tdlib_commit/build -S td-$_tdlib_commit \
         -DCMAKE_BUILD_TYPE=None \

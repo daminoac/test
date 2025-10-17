@@ -119,6 +119,10 @@ pkgver() {
 }
 
 build() {
+  export CCACHE_DIR="${CCACHE_DIR:-$HOME/.cache/ccache}"
+  export CC="ccache gcc"
+  export CXX="ccache g++"
+  mkdir -p "$CCACHE_DIR"
   echo "Building tde2e..."
   local _cmake_tde2e=(
     -B "build_tde2e"
